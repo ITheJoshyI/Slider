@@ -1,0 +1,244 @@
+
+body {
+    font-family: lato, sans-serif;
+    background-color: #ffffff;
+    color: #eee;
+    margin: 0;
+    font-size: 12px;
+}
+
+header {
+    width: 1140px;
+    max-width: 80%;
+    margin: 0 auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    font-size: 40px;
+    font-family: lato, sans-serif;
+}
+
+.carousel {
+    width: 70vw;
+    height:  80vh;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+}
+
+.carousel .list .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    opacity: 0;
+}
+
+.carousel .list .item:nth-child(1) {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel .list .item img {
+    position: absolute;
+    width: 40vw;
+    height: 50vh;
+    background-color: rgb(53, 53, 53);
+    border-radius: 20px;
+    object-fit: cover;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+
+}
+
+.carousel .list .item .content {
+    position: absolute;
+    top: 11%;
+    width: 1140px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-33%);
+    padding-right: 30%;
+    box-sizing: border-box;
+    font-family: Lato, sans-serif;
+    font-size: large;
+    color: #fff;
+    text-shadow: 0 5px 10px #0004;;
+}
+
+/* thumbnail */
+.thumbnail {
+    position: absolute;
+    bottom:-50px;
+    left: 1%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+}
+
+.thumbnail .item {
+    width: 150px;
+    height: 220px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    background-color: rgb(53, 53, 53);
+    border-radius: 20px;
+}
+
+.thumbnail .item .content {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    right: 10px;
+}
+
+.arrows {
+    position: absolute;
+    top: 35%;
+    left: 18%;
+    width: 300px;
+    max-width: 30%;
+    display: flex;
+    gap: clamp(1px, 43vw, 1000px); 
+    align-items: center;
+}
+
+.arrows button {
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+    background-color: #eee4;
+    border: none;
+    font-family: lato, sans-serif;
+    color: #fff;
+    font-weight: bold;
+    font-size: large;
+    transition: .5s;
+    z-index: 100;
+}
+
+.arrows button:hover {
+    background-color: #eee;
+    color: #555;;
+}
+
+.carousel .list .item:nth-child(1) .uas_name {
+    transform: translate(50px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent 0.5s 1s linear forwards;
+}
+
+@keyframes showContent {
+    to {
+        opacity: 1;
+        filter: blur(0);
+         transform: translateY(0);
+    }
+}
+
+/* effect next click */
+.carousel.next .list .item:nth-child(1) img {
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    left: 50%;
+    bottom: 50px;
+    border-radius: 20px;
+    transform: translate(-50%, 400px); /* START: weiter unten */
+    animation: showImage 0.5s linear forwards;
+}
+
+@keyframes showImage {
+    to {
+        width: 40vw;
+        height: 50vh;
+        border-radius: 20px;
+        object-fit: cover;
+        left: 50%;
+        transform: translate(-50%); /* ENDE: normale Position */
+    }
+}
+
+.carousel.next .thumbnail .item:nth-last-child(1){
+    width: 0;
+    overflow: hidden;
+    animation: showThumpnail .5s linear 1 forwards;
+}
+
+@keyframes showThumpnail {
+    to {
+        width: 150px;
+    }
+}
+
+.carousel.next .thumbnail{
+    transform: translateX(150px);
+    animation: transformThumbnail .5s linear 1 forwards;
+}
+
+@keyframes transformThumbnail {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* effect prev click */
+.carousel.prev .list .item:nth-child(2){
+    z-index: 2;
+}
+
+.carousel.prev .list .item:nth-child(2) img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: outImage 0.5s linear forwards;
+}
+
+@keyframes outImage {
+    to {
+        width: 150px;
+        height: 220px;
+        border-radius: 20px;
+        left: 50%;
+        bottom: 50px;
+    }
+}
+
+.carousel.prev .thumbnail .item:nth-child(1){
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    animation: showThumpnail 0.5s linear 1 forwards;
+}
+
+.carousel.prev .list .item:nth-child(2) .uas_name {
+    animation: contentOut 1.5s linear 1 forwards;
+}
+@keyframes contentOut {
+    to {
+        opacity: 0;
+        filter: blur(20px);
+        transform: translateY(-150px);
+    }
+}
+.carousel.next .arrows button,
+.carousel.prev .arrows button {
+    pointer-events: none;
+}
+
+@media screen and (max-width: 678px) {
+    .carousel .list .item .content{
+        padding-right: 0;
+        font-size: 30px;
+    }
+}
